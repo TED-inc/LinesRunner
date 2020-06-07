@@ -10,7 +10,7 @@ namespace TEDinc.LinesRunner
         public void LineElevation()
         {
             Vector3 leftLine, rightLine;
-            IWorldController worldControler = new WorldController(new FakeWorld());
+            IWorldController worldControler = new WorldController(new World(new PlatformsFactory()));
             float distance = 5f;
 
             worldControler.ElevateLines(distance, out leftLine, out rightLine);
