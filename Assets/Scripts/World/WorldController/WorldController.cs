@@ -4,17 +4,26 @@ namespace TEDinc.LinesRunner
 {
     public class WorldController: IWorldController
     {
-        protected readonly IWorld world;
+        protected readonly IWorldPlatforms worldPlatforms;
 
         public void ElevateLines(float distance, out Vector3 leftLine, out Vector3 rightLine)
         {
-            leftLine = new Vector3(distance, 0f, -1f);
-            rightLine = new Vector3(distance, 0f, 1f);
+            float localDistance;
+            Vector3 localLeftLine, localRightLine;
+            worldPlatforms.GetPlatformAt(distance, out localDistance).ElevateLines(localDistance, out localLeftLine, out localRightLine);
+            leftLine = // rotate offset before adding
+                Quaternion.Euler(0f, worldPlatforms.GetTotalOffsetRotationAt(distance), 0f)
+                 * localLeftLine
+                 + worldPlatforms.GetTotalOffsetAt(distance);
+            rightLine = // rotate offset before adding
+                Quaternion.Euler(0f, worldPlatforms.GetTotalOffsetRotationAt(distance), 0f)
+                 * localRightLine
+                 + worldPlatforms.GetTotalOffsetAt(distance);
         }
 
-        public WorldController(IWorld world)
+        public WorldController(IWorldPlatforms worldPlatforms)
         {
-            this.world = world;
+            this.worldPlatforms = worldPlatforms;
         }
     }
 }

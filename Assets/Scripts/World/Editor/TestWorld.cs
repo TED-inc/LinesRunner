@@ -1,29 +1,30 @@
 ﻿using NUnit.Framework;
 
-namespace TEDinc.LinesRunner
+namespace TEDinc.LinesRunner.Tests
 {
     public sealed class TestWorld
     {
         [Test]
         public void PlacingTest()
         {
-            World world = new World(new FakePlatformsFactory());
+            FakePlatformsFactory fakePlatformsFactory = new FakePlatformsFactory();
+            WorldPlatforms world = new WorldPlatforms(fakePlatformsFactory);
 
-            Assert.AreEqual(
-                new FakePlatformA().length,
-                world.GetPlatformAt(new FakePlatformA().length - 0.0001f).length);
-            Assert.AreEqual(
-                new FakePlatformB().length,
-                world.GetPlatformAt(new FakePlatformA().length + 0.0001f).length);
-            Assert.AreEqual(
-                new FakePlatformB().length,
-                world.GetPlatformAt(new FakePlatformA().length + new FakePlatformB().length - 0.0001f).length);
-            Assert.AreEqual(
-                new FakePlatformC().length,
-                world.GetPlatformAt(new FakePlatformA().length + new FakePlatformB().length + 0.0001f).length);
-            Assert.AreEqual(
-                new FakePlatformC().length,
-                world.GetPlatformAt(new FakePlatformA().length + new FakePlatformB().length + new FakePlatformC().length).length);
+            fakePlatformsFactory.platformLength = 1f;
+            Assert.AreEqual(1f, world.GetPlatformAt(1f - 0.0001f).length);
+            fakePlatformsFactory.platformLength = 2f;
+            Assert.AreEqual(2f, world.GetPlatformAt(1f + 0.0001f).length);
+            Assert.AreEqual(2f, world.GetPlatformAt(1f + 2f - 0.0001f).length);
+            fakePlatformsFactory.platformLength = 3f;
+            Assert.AreEqual(3f, world.GetPlatformAt(1f + 2f + 0.0001f).length);
+            Assert.AreEqual(3f, world.GetPlatformAt(1f + 2f + 3f).length);
+        }
+
+        [Test]
+        public void CheckSpawning()
+        {
+            IWorldPlatforms world = new WorldPlatforms(new PlatformsFactory());
+            Assert.AreEqual("platform", (world.GetPlatformAt(1f) as PlatformBase).name);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public static class GameConst
     {
-        public const int LinesCount = 3;
+        public const int linesCount = 3;
     }
 }

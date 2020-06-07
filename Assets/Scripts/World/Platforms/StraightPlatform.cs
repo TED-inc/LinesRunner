@@ -1,7 +1,7 @@
 ﻿namespace TEDinc.LinesRunner
 {
-    public class StraightPlatform : IPlatform
+    public class StraightPlatform : PlatformBase
     {
-        public float length { get; protected set; } = 5f;
+
     }
 }
