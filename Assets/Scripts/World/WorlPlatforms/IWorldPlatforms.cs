@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace TEDinc.LinesRunner
 {
@@ -7,9 +8,20 @@ namespace TEDinc.LinesRunner
         float generatedPlatformsLength { get; }
         float totalOffsetRotation { get; }
         Vector3 totalOffset { get; }
+        List<PlatformHolder> platformHolders { get; }
         IPlatform GetPlatformAt(float distance);
         IPlatform GetPlatformAt(float distance, out float localDistance);
-        float GetTotalOffsetRotationAt(float distance);
-        Vector3 GetTotalOffsetAt(float distance);
+    }
+
+    public sealed class PlatformHolder
+    {
+        public readonly float generatedLength;
+        public readonly IPlatform platform;
+
+        public PlatformHolder(float generatedLength, IPlatform platform)
+        {
+            this.generatedLength = generatedLength;
+            this.platform = platform;
+        }
     }
 }

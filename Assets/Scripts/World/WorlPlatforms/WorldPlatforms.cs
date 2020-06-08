@@ -11,8 +11,7 @@ namespace TEDinc.LinesRunner
                 platformHolders[platformHolders.Count - 1].generatedLength;
         public float totalOffsetRotation { get; protected set; } = 0f;
         public Vector3 totalOffset { get; protected set; } = Vector3.zero;
-
-        protected List<PlatformHolder> platformHolders = new List<PlatformHolder>();
+        public List<PlatformHolder> platformHolders { get; protected set; } = new List<PlatformHolder>();
         protected readonly IPlatformsFactory platformsFactory;
 
 
@@ -65,69 +64,8 @@ namespace TEDinc.LinesRunner
             totalOffsetRotation %= 360f; //clamp rotation
         }
 
-        public float GetTotalOffsetRotationAt(float distance)
-        {
-            //just for fill platforms if it empty
-            GetPlatformAt(distance);
-
-            float offsetRotation = 0f;
-            if (platformHolders[0].generatedLength < distance)
-                offsetRotation += platformHolders[0].platform.offsetRotation;
-
-            for (int i = 0; i < platformHolders.Count - 1; i++)
-            {
-                if (platformHolders[i + 1].generatedLength >= distance)
-                    break;
-                else
-                    offsetRotation += platformHolders[i + 1].platform.offsetRotation;
-            }
-            offsetRotation %= 360f; //clamp rotation
-
-            return offsetRotation;
-        }
-
-        public Vector3 GetTotalOffsetAt(float distance)
-        {
-            //just for fill platforms if it empty
-            GetPlatformAt(distance);
-
-            Vector3 offset = Vector3.zero;
-
-            if (platformHolders[0].generatedLength < distance)
-                offset += platformHolders[0].platform.offset;
-
-            for (int i = 0; i < platformHolders.Count - 1; i++)
-            {
-                if (platformHolders[i + 1].generatedLength >= distance)
-                    break;
-                else
-                    offset += // rotate offset before adding
-                        Quaternion.Euler(0f, platformHolders[i].platform.offsetRotation, 0f)
-                        * platformHolders[i + 1].platform.offset;
-            }
-
-            return offset;
-        }
-
-
-
-        public WorldPlatforms(IPlatformsFactory platformsFactory)
-        {
+        
+        public WorldPlatforms(IPlatformsFactory platformsFactory) =>
             this.platformsFactory = platformsFactory;
-        }
-
-
-
-        protected sealed class PlatformHolder
-        {
-            public readonly float generatedLength;
-            public readonly IPlatform platform;
-
-            public PlatformHolder(float generatedLength, IPlatform platform)
-            {
-                this.generatedLength = generatedLength;
-                this.platform = platform;
-            }
-        }
     }
 }

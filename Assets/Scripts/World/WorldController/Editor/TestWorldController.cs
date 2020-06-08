@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.TestTools.Utils;
+using UnityEditor;
 using NUnit.Framework;
 
 namespace TEDinc.LinesRunner.Tests
@@ -25,6 +26,8 @@ namespace TEDinc.LinesRunner.Tests
             distance = 1.5f;
             CheckOffset();
             distance = 12f;
+            CheckOffset();
+            distance = 230f;
             CheckOffset();
 
 
@@ -68,6 +71,29 @@ namespace TEDinc.LinesRunner.Tests
             worldControler.ElevateLines(12.5f, out leftLine, out rightLine);
             Assert.That(leftLine, Is.EqualTo(new Vector3(9.535534f, 0f, -6.035534f)).Using(Vector3EqualityComparer.Instance));
             Assert.That(rightLine, Is.EqualTo(new Vector3(7.535534f, 0f, -6.035534f)).Using(Vector3EqualityComparer.Instance));
+        }
+
+        [Test]
+        public void LineElevationReal()
+        {
+            Vector3 leftLineA, rightLineA, leftLineB, rightLineB;
+            IWorldController worldControler = new WorldController(new WorldPlatforms(new PlatformsFactory(
+                AssetDatabase.LoadAssetAtPath<PlatformsHolderSO>(
+                    AssetDatabase.GUIDToAssetPath(
+                        AssetDatabase.FindAssets("t:" + nameof(PlatformsHolderSO))[0]))
+                )));
+
+            worldControler.ElevateLines(49.9999f, out leftLineA, out rightLineA);
+            worldControler.ElevateLines(50.0001f, out leftLineB, out rightLineB);
+            Assert.That(leftLineA, Is.EqualTo(leftLineB).Using(Vector3EqualityComparer.Instance));
+
+            worldControler.ElevateLines(74.9999f, out leftLineA, out rightLineA);
+            worldControler.ElevateLines(75.0001f, out leftLineB, out rightLineB);
+            Assert.That(leftLineA, Is.EqualTo(leftLineB).Using(Vector3EqualityComparer.Instance));
+
+            worldControler.ElevateLines(149.9999f, out leftLineA, out rightLineA);
+            worldControler.ElevateLines(150.0001f, out leftLineB, out rightLineB);
+            Assert.That(leftLineA, Is.EqualTo(leftLineB).Using(Vector3EqualityComparer.Instance));
         }
     }
 }

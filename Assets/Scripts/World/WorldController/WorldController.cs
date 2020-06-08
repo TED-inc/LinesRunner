@@ -21,10 +21,18 @@ namespace TEDinc.LinesRunner
                  + worldPlatforms.GetTotalOffsetAt(distance);
         }
 
-        public void LaodWorldUpTo(float distance) => 
+        public void LoadWorldUpTo(float distance) => 
             worldPlatforms.GetPlatformAt(distance);
 
-
+        public void HideWorldBefore(float distance)
+        {
+            foreach (PlatformHolder item in worldPlatforms.platformHolders)
+            {
+                if (item.generatedLength < distance)
+                    if (item.platform is MonoBehaviour)
+                        (item.platform as MonoBehaviour).gameObject.SetActive(false);
+            }
+        }
 
         public WorldController(IWorldPlatforms worldPlatforms) => 
             this.worldPlatforms = worldPlatforms;

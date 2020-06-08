@@ -15,7 +15,9 @@ namespace TEDinc.LinesRunner
                 platformsHolderSO.platforms[index].platform,
                 worldPosition,
                 Quaternion.Euler(0f, worldRotataion, 0f),
-                GameRunnerController.instance.transform);
+                GameRunnerController.instance == null ?
+                    null :
+                    GameRunnerController.instance.transform);
 
 
 

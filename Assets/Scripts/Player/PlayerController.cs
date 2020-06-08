@@ -2,19 +2,18 @@
 
 namespace TEDinc.LinesRunner
 {
-    public class PlayerController
+    public class PlayerController : MonoBehaviour
     {
-        private readonly IPlayer player;
+        private IPlayerMover playerMover;
 
-        public void Move()
+        public void Init(IPlayerMover playerMover) =>
+            this.playerMover = playerMover;
+
+        public void Move(float distance)
         {
-            
-        }
-
-
-        public PlayerController(IPlayer player)
-        {
-            this.player = player;
+            Pose pose = playerMover.Move(distance);
+            transform.position = pose.position;
+            transform.rotation = pose.rotation;
         }
     }
 }
