@@ -2,7 +2,7 @@
 
 namespace TEDinc.LinesRunner.Tests
 {
-    public sealed class TestWorld
+    public sealed class TestWorldPlatforms
     {
         [Test]
         public void PlacingTest()
