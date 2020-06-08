@@ -23,8 +23,8 @@ namespace TEDinc.LinesRunner.Tests
         [Test]
         public void CheckSpawning()
         {
-            IWorldPlatforms world = new WorldPlatforms(new PlatformsFactory());
-            Assert.AreEqual("platform", (world.GetPlatformAt(1f) as PlatformBase).name);
+            IWorldPlatforms world = new WorldPlatforms(new FakePlatformsFactory());
+            Assert.AreEqual("fakePlatform", (world.GetPlatformAt(1f) as PlatformBase).name);
         }
     }
 }

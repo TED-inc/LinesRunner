@@ -54,11 +54,12 @@ namespace TEDinc.LinesRunner
 
         protected void AddNewPlatform()
         {
-            IPlatform platform = platformsFactory.GetNextPlatform();
+            IPlatform platform = platformsFactory.GetNextPlatform(totalOffset, totalOffsetRotation);
             platformHolders.Add(
                 new PlatformHolder(
                     generatedPlatformsLength + platform.length,
                     platform));
+
             totalOffset += Quaternion.Euler(0f, totalOffsetRotation, 0f) * platform.offset; //rotate offset before adding
             totalOffsetRotation += platform.offsetRotation;
             totalOffsetRotation %= 360f; //clamp rotation

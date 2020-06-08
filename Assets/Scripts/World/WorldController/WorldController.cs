@@ -21,9 +21,12 @@ namespace TEDinc.LinesRunner
                  + worldPlatforms.GetTotalOffsetAt(distance);
         }
 
-        public WorldController(IWorldPlatforms worldPlatforms)
-        {
+        public void LaodWorldUpTo(float distance) => 
+            worldPlatforms.GetPlatformAt(distance);
+
+
+
+        public WorldController(IWorldPlatforms worldPlatforms) => 
             this.worldPlatforms = worldPlatforms;
-        }
     }
 }

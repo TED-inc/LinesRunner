@@ -1,7 +1,9 @@
-﻿namespace TEDinc.LinesRunner
+﻿using UnityEngine;
+
+namespace TEDinc.LinesRunner
 {
     public interface IPlatformsFactory
     {
-        IPlatform GetNextPlatform();
+        IPlatform GetNextPlatform(Vector3 worldPosition, float worldRotataion);
     }
 }

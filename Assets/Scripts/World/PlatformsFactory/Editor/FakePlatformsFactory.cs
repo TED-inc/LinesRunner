@@ -7,7 +7,7 @@ namespace TEDinc.LinesRunner.Tests
         public float platformLength = 5f;
         public float platformRotation = 0f;
 
-        public IPlatform GetNextPlatform()
+        public IPlatform GetNextPlatform(Vector3 worldPosition, float worldRotataion)
         {
             FakePlatform fakePlatform;
             fakePlatform = new GameObject("fakePlatform", typeof(FakePlatform)).GetComponent<FakePlatform>();

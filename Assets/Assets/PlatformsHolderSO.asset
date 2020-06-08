@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02746eb9532121e44b11608e1504eadc, type: 3}
+  m_Name: PlatformsHolderSO
+  m_EditorClassIdentifier: 
+  platforms:
+  - platform: {fileID: 3409205979039438552, guid: 966e92edf93eb5b4fa9faf499a0f5ae1,
+      type: 3}
+    weight: 8
+  - platform: {fileID: 3644230583538939097, guid: 2256c7ea7a373df46b51f3b05b438b2d,
+      type: 3}
+    weight: 1
+  - platform: {fileID: 3644230583538939097, guid: 00bf64793fc40c842bcc27e7e30aba9c,
+      type: 3}
+    weight: 1
+  - platform: {fileID: 3644230583538939097, guid: 1969c120df596624c9f50a9ee387d47b,
+      type: 3}
+    weight: 2
+  - platform: {fileID: 3644230583538939097, guid: 930317a871bbba449b39c80980138f79,
+      type: 3}
+    weight: 2
+  - platform: {fileID: 3644230583538939097, guid: a154b20850436c2429347cb05756bacb,
+      type: 3}
+    weight: 4
+  - platform: {fileID: 3644230583538939097, guid: 78c05aa77a521f54689f51f9caa0f5ca,
+      type: 3}
+    weight: 4
