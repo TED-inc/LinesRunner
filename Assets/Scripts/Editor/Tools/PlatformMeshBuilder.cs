@@ -1,52 +1,20 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace TEDinc.LinesRunner.Tools
 {
-    [RequireComponent(typeof(MeshFilter))]
-    public class PlatformMeshBuilder : EditorWindow
+    public class PlatformMeshBuilder
     {
-        [SerializeField]
-        protected PlatformBase platform;
-        static float depth = 1f;
-        static float sideOffset = 0.5f;
-        static int iterations = 10;
+        public PlatformBase platform;
+        public float depth;
+        public float sideOffset;
+        public int iterations;
 
 
-        [MenuItem(nameof(Tools) + "/" + nameof(PlatformMeshBuilder))]
-        static void Init()
+        public Mesh Build()
         {
-            PlatformMeshBuilder window =
-                (PlatformMeshBuilder)EditorWindow.GetWindow(
-                    typeof(PlatformMeshBuilder),
-                    false,
-                    ObjectNames.NicifyVariableName(nameof(PlatformMeshBuilder)));
-        }
-
-        private void OnGUI()
-        {
-            platform = EditorGUILayout.ObjectField(platform, typeof(PlatformBase), true) as PlatformBase;
-
-            depth = EditorGUILayout.FloatField(ObjectNames.NicifyVariableName(nameof(depth)), depth);
-            sideOffset = EditorGUILayout.FloatField(ObjectNames.NicifyVariableName(nameof(sideOffset)), sideOffset);
-            iterations = EditorGUILayout.IntField(ObjectNames.NicifyVariableName(nameof(iterations)), iterations);
-
-            EditorGUI.BeginDisabledGroup(platform == null);
-            if (GUILayout.Button(nameof(Build)))
-                Build();
-            EditorGUI.EndDisabledGroup();
-        }
-
-
-        public virtual void Build()
-        {
-            Transform meshObject = platform.transform.Find(GameConst.platformMeshObjectName);
-            MeshFilter meshFilter = meshObject.GetComponent<MeshFilter>();
-            MeshCollider meshCollider = meshObject.GetComponent<MeshCollider>();
             Mesh mesh = new Mesh();
-
             GenerateMesh();
-            SaveMesh();
+            return mesh;
             
 
             void GenerateMesh()
@@ -88,7 +56,7 @@ namespace TEDinc.LinesRunner.Tools
 
                     void SetSquare(int i)
                     {
-                        ///square shema, look at us - clockwise
+                        ///square shema - clockwise
                         /// b-d
                         /// |\|
                         /// a-c
@@ -116,7 +84,7 @@ namespace TEDinc.LinesRunner.Tools
 
                 void FillVertFull(float f)
                 {
-                    /// verticies shema, builds counter clockwise
+                    /// verticies shema - counter clockwise
                     /// a----d
                     /// \    / 
                     ///  b--c
@@ -148,32 +116,6 @@ namespace TEDinc.LinesRunner.Tools
                     }
                 }
             }
-
-            void SaveMesh()
-            {
-                if (AssetDatabase.IsValidFolder(GameConst.platformMeshSavePath))
-                    AssetDatabase.CreateAsset(mesh, GameConst.platformMeshSavePath + "/" + platform.name + "Mesh.asset");
-
-                meshFilter.sharedMesh = mesh;
-                if (meshCollider != null)
-                    meshCollider.sharedMesh = mesh;
-            }
         }
-
-        //private void OnDrawGizmos()
-        //{
-        //    MeshFilter meshFilter = GetComponent<MeshFilter>();
-        //    
-        //
-        //    for (int i = 0; i < meshFilter.sharedMesh.vertexCount; i++)
-        //    {
-        //        if (i % 2 == 0)
-        //            Gizmos.color = Color.green;
-        //        else
-        //            Gizmos.color = Color.grey;
-        //
-        //        Gizmos.DrawLine(meshFilter.sharedMesh.vertices[i], meshFilter.sharedMesh.vertices[i] + meshFilter.sharedMesh.normals[i] * 0.2f);
-        //    }
-        //}
     }
 }

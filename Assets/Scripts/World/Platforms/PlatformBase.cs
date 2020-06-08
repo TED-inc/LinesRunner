@@ -35,10 +35,11 @@ namespace TEDinc.LinesRunner
 
                 for (int j = 0; j < GameConst.linesCount; j++)
                 {
-                    Gizmos.color = Color.HSVToRGB((j / (GameConst.linesCount - 1f)) * 0.7f + 0.15f, 1f, 1f);
+                    float t = j / (GameConst.linesCount - 1f);
+                    Gizmos.color = Color.HSVToRGB(t * 0.7f, 1f, 1f); //red on left line, next by hue gradient from 0 til 0.7
                     Gizmos.DrawLine(
-                        Vector3.Lerp(transform.TransformPoint(localLeftLine), transform.TransformPoint(localRightLine), j / (GameConst.linesCount - 1f)),
-                         Vector3.Lerp(transform.TransformPoint(localLeftLineNext), transform.TransformPoint(localRightLineNext), j / (GameConst.linesCount - 1f)));
+                        Vector3.Lerp(transform.TransformPoint(localLeftLine), transform.TransformPoint(localRightLine), t),
+                         Vector3.Lerp(transform.TransformPoint(localLeftLineNext), transform.TransformPoint(localRightLineNext), t));
                 }
 
                 localLeftLine = localLeftLineNext;
@@ -47,9 +48,12 @@ namespace TEDinc.LinesRunner
 
             //draw connectors
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, 0.2f);
-            Gizmos.DrawSphere(transform.TransformPoint(offset), 0.2f);
-            Gizmos.DrawLine(transform.TransformPoint(offset), transform.TransformPoint(offset) + Quaternion.Euler(0f, offsetRotation + 90, 0f) * transform.forward);
+            Gizmos.DrawWireSphere(transform.position, 0.2f); //start connector
+            Gizmos.DrawSphere(transform.TransformPoint(offset), 0.2f); //end connector
+            Gizmos.DrawLine(transform.TransformPoint(offset), //end rotation vector
+                transform.TransformPoint(offset)
+                + Quaternion.Euler(0f, offsetRotation + 90, 0f)
+                * transform.forward);
         }
 #endif
     }
