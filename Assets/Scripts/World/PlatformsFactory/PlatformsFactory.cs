@@ -8,16 +8,15 @@ namespace TEDinc.LinesRunner
 
         public IPlatform GetNextPlatform(Vector3 worldPosition, float worldRotataion)
         {
-            
             int index = GetRandomPlatformIndex();
+            Transform parent = GetPlatformParent();
+            PlatformBase platformBase = platformsHolderSO.platforms[index].platform;
 
             return GameObject.Instantiate<PlatformBase>(
-                platformsHolderSO.platforms[index].platform,
+                platformBase,
                 worldPosition,
                 Quaternion.Euler(0f, worldRotataion, 0f),
-                GameRunnerController.instance == null ?
-                    null :
-                    GameRunnerController.instance.transform);
+                parent);
 
 
 
@@ -38,6 +37,20 @@ namespace TEDinc.LinesRunner
 
                 Debug.LogError($"[PLF] {nameof(GetRandomPlatformIndex)}: some logic error");
                 return -1;
+            }
+
+            Transform GetPlatformParent()
+            {
+#if UNITY_EDITOR
+                //null only for tests
+                return GameRunnerController.instance == null ?
+                    null :
+                    GameRunnerController.instance.transform;
+#else
+                if (GameRunnerController.instance == null)
+                    Debug.LogError($"[PLF] {nameof(GetRandomPlatformIndex)}: no instnce of GRC");
+                return GameRunnerController.instance.transform;
+#endif
             }
         }
 

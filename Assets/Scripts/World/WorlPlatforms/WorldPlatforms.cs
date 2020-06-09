@@ -12,6 +12,7 @@ namespace TEDinc.LinesRunner
         public float totalOffsetRotation { get; protected set; } = 0f;
         public Vector3 totalOffset { get; protected set; } = Vector3.zero;
         public List<PlatformHolder> platformHolders { get; protected set; } = new List<PlatformHolder>();
+
         protected readonly IPlatformsFactory platformsFactory;
 
 
@@ -27,7 +28,7 @@ namespace TEDinc.LinesRunner
             localDistance = distance;
             if (distance < 0f)
             {
-                Debug.LogError("[WLD] GetPlatform : negetive distance");
+                Debug.LogError("[WLP] GetPlatform : negetive distance");
                 return null;
             }
 
@@ -47,7 +48,7 @@ namespace TEDinc.LinesRunner
                     return platformHolders[i + 1].platform;
                 }
 
-            Debug.LogError("[WLD] GetPlatform : logic error");
+            Debug.LogError("[WLP] GetPlatform : logic error");
             return platformHolders[platformHolders.Count - 1].platform;
         }
 
@@ -59,12 +60,28 @@ namespace TEDinc.LinesRunner
                     generatedPlatformsLength + platform.length,
                     platform));
 
+            platform.SetWorldData(totalOffsetRotation, totalOffset);
+
             totalOffset += Quaternion.Euler(0f, totalOffsetRotation, 0f) * platform.offset; //rotate offset before adding
             totalOffsetRotation += platform.offsetRotation;
             totalOffsetRotation %= 360f; //clamp rotation
         }
 
-        
+        public void DestroyPlatformsBefore(float distance)
+        {
+            if (distance < 0f)
+                return;
+                
+            while (platformHolders[0].generatedLength < distance)
+            {
+                if (platformHolders[0].platform is MonoBehaviour)
+                    GameObject.Destroy((platformHolders[0].platform as MonoBehaviour).gameObject);
+            
+                platformHolders.RemoveAt(0);
+            }
+        }
+
+
         public WorldPlatforms(IPlatformsFactory platformsFactory) =>
             this.platformsFactory = platformsFactory;
     }

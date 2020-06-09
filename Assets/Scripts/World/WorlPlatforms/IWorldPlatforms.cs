@@ -11,6 +11,7 @@ namespace TEDinc.LinesRunner
         List<PlatformHolder> platformHolders { get; }
         IPlatform GetPlatformAt(float distance);
         IPlatform GetPlatformAt(float distance, out float localDistance);
+        void DestroyPlatformsBefore(float distance);
     }
 
     public sealed class PlatformHolder

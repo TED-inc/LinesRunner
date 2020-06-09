@@ -10,27 +10,43 @@ namespace TEDinc.LinesRunner
         {
             float localDistance;
             Vector3 localLeftLine, localRightLine;
-            worldPlatforms.GetPlatformAt(distance, out localDistance).ElevateLines(localDistance, out localLeftLine, out localRightLine);
+            IPlatform platform = worldPlatforms.GetPlatformAt(distance, out localDistance);
+            platform.ElevateLines(localDistance, out localLeftLine, out localRightLine);
+
             leftLine = // rotate offset before adding
-                Quaternion.Euler(0f, worldPlatforms.GetTotalOffsetRotationAt(distance), 0f)
+                Quaternion.Euler(0f, platform.totalOffsetRotation, 0f)
                  * localLeftLine
-                 + worldPlatforms.GetTotalOffsetAt(distance);
+                 + platform.totalOffset;
             rightLine = // rotate offset before adding
-                Quaternion.Euler(0f, worldPlatforms.GetTotalOffsetRotationAt(distance), 0f)
+                Quaternion.Euler(0f, platform.totalOffsetRotation, 0f)
                  * localRightLine
-                 + worldPlatforms.GetTotalOffsetAt(distance);
+                 + platform.totalOffset;
         }
 
-        public void LoadWorldUpTo(float distance) => 
-            worldPlatforms.GetPlatformAt(distance);
+        public void LoadWorldUpTo(float from, float to)
+        {
+            if (worldPlatforms.platformHolders[worldPlatforms.platformHolders.Count - 1].generatedLength < to)
+                worldPlatforms.GetPlatformAt(to);
+
+            foreach (PlatformHolder platformHolder in worldPlatforms.platformHolders)
+            {
+                if (platformHolder.generatedLength > from && platformHolder.generatedLength < to)
+                    if (platformHolder.platform is MonoBehaviour)
+                        (platformHolder.platform as MonoBehaviour).gameObject.SetActive(true);
+            }
+        }
+            
 
         public void HideWorldBefore(float distance)
         {
-            foreach (PlatformHolder item in worldPlatforms.platformHolders)
+            if (distance < 0f)
+                return;
+
+            foreach (PlatformHolder platformHolder in worldPlatforms.platformHolders)
             {
-                if (item.generatedLength < distance)
-                    if (item.platform is MonoBehaviour)
-                        (item.platform as MonoBehaviour).gameObject.SetActive(false);
+                if (platformHolder.generatedLength < distance)
+                    if (platformHolder.platform is MonoBehaviour)
+                        (platformHolder.platform as MonoBehaviour).gameObject.SetActive(false);
             }
         }
 

@@ -7,7 +7,8 @@ namespace TEDinc.LinesRunner
         public virtual float length { get { return _length; } protected set { _length = value; } }
         public virtual float offsetRotation { get; protected set; }
         public virtual Vector3 offset => length * Vector3.right;
-        
+        public float totalOffsetRotation { get; private set; }
+        public Vector3 totalOffset { get; private set; }
 
         [SerializeField]
         private float _length = 5f;
@@ -18,6 +19,12 @@ namespace TEDinc.LinesRunner
         {
             localLeftLine = new Vector3(localDistance, 0f, GameConst.platformWidth / 2f);
             localRightLine = new Vector3(localDistance, 0f, -GameConst.platformWidth / 2f);
+        }
+
+        public void SetWorldData(float totalOffsetRotation, Vector3 totalOffset)
+        {
+            this.totalOffsetRotation = totalOffsetRotation;
+            this.totalOffset = totalOffset;
         }
 
 #if UNITY_EDITOR

@@ -29,7 +29,7 @@ namespace TEDinc.LinesRunner
         }
 
         private void Start() =>
-            worldController.LoadWorldUpTo(GameConst.loadDistance);
+            worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
 
         private void Update() =>
             playerController.Move(testDistance);
