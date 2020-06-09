@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace TEDinc.LinesRunner
@@ -9,9 +8,9 @@ namespace TEDinc.LinesRunner
     {
         public virtual WeightHolder[] collection { get; protected set; }
 
-        public virtual Object GetNextByWeigth()
+        public virtual object GetNextByWeigth()
         {
-            return collection[GetRandomIndex()].obj;
+            return collection[GetRandomIndex()];
 
 
             int GetRandomIndex()
@@ -38,7 +37,7 @@ namespace TEDinc.LinesRunner
     [Serializable]
     public abstract class WeightHolder
     {
-        public virtual Object obj { get; protected set; }
+        public virtual object obj { get; protected set; }
         public float weight { get { return _weight; } protected set { _weight = value; } }
         [SerializeField]
         protected float _weight;

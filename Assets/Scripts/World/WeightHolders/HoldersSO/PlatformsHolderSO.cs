@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace TEDinc.LinesRunner
 {
@@ -12,9 +11,9 @@ namespace TEDinc.LinesRunner
         public PlatformWeightHolder[] platforms { get => _platforms; private set => _platforms = value; }
         public override WeightHolder[] collection { get => platforms; protected set => platforms = value as PlatformWeightHolder[]; }
 
-        public new PlatformBase GetNextByWeigth()
+        public new PlatformWeightHolder GetNextByWeigth()
         {
-            return base.GetNextByWeigth() as PlatformBase;
+            return base.GetNextByWeigth() as PlatformWeightHolder;
         }
     }
 
@@ -24,6 +23,6 @@ namespace TEDinc.LinesRunner
         [SerializeField]
         private PlatformBase _platform;
         public PlatformBase platform { get => _platform; private set => _platform = value; }
-        public override Object obj { get => platform; protected set => platform = value as PlatformBase; }
+        public override object obj { get => platform; protected set => platform = value as PlatformBase; }
     }
 }

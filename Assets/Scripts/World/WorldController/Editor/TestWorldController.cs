@@ -12,7 +12,7 @@ namespace TEDinc.LinesRunner.Tests
         {
             Vector3 leftLine, rightLine;
             FakePlatformsFactory fakePlatformsFactory = new FakePlatformsFactory();
-            IWorldController worldControler = new WorldController(new WorldPlatforms(fakePlatformsFactory));
+            IWorldController worldControler = new WorldController(new WorldPlatforms(fakePlatformsFactory, new FakeObstacleFactory()));
             float distance;
 
             fakePlatformsFactory.platformLength = 5f;
@@ -44,7 +44,7 @@ namespace TEDinc.LinesRunner.Tests
         {
             Vector3 leftLine, rightLine;
             FakePlatformsFactory fakePlatformsFactory = new FakePlatformsFactory();
-            IWorldController worldControler = new WorldController(new WorldPlatforms(fakePlatformsFactory));
+            IWorldController worldControler = new WorldController(new WorldPlatforms(fakePlatformsFactory, new FakeObstacleFactory()));
 
             fakePlatformsFactory.platformLength = 5f;
             fakePlatformsFactory.platformRotation = 90f;
@@ -61,7 +61,7 @@ namespace TEDinc.LinesRunner.Tests
             Assert.That(leftLine, Is.EqualTo(new Vector3(6f, 0f, -2.5f)).Using(Vector3EqualityComparer.Instance));
             Assert.That(rightLine, Is.EqualTo(new Vector3(4f, 0f, -2.5f)).Using(Vector3EqualityComparer.Instance));
 
-            worldControler = new WorldController(new WorldPlatforms(fakePlatformsFactory));
+            worldControler = new WorldController(new WorldPlatforms(fakePlatformsFactory, new FakeObstacleFactory()));
             fakePlatformsFactory.platformRotation = 45f;
             
             worldControler.ElevateLines(7.5f, out leftLine, out rightLine);
@@ -79,9 +79,8 @@ namespace TEDinc.LinesRunner.Tests
             Vector3 leftLineA, rightLineA, leftLineB, rightLineB;
             IWorldController worldControler = new WorldController(new WorldPlatforms(
                 new PlatformsFactory(
-                    GetSO(typeof(PlatformsHolderSO)) as PlatformsHolderSO,
-                    new ObstaclesFactory(
-                        GetSO(typeof(ObstaclesHolderSO)) as ObstaclesHolderSO))));
+                    GetSO(typeof(PlatformsHolderSO)) as PlatformsHolderSO),
+                new FakeObstacleFactory()));
 
             worldControler.ElevateLines(49.9999f, out leftLineA, out rightLineA);
             worldControler.ElevateLines(50.0001f, out leftLineB, out rightLineB);

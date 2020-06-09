@@ -24,24 +24,23 @@ namespace TEDinc.LinesRunner
 
         private void Awake()
         {
-            worldPlatforms = new WorldPlatforms(
-                new PlatformsFactory(
-                    platformsHolderSO,
-                    new ObstaclesFactory(obstaclesHolderSO)));
-            worldController = new WorldController(worldPlatforms);
-
-            playerController.Init(new PlayerMover());
-
             if (instance == null)
                 instance = this;
             else
                 Debug.LogError("[GRC] Only one instance must be in game!");
+
+            worldPlatforms = new WorldPlatforms(
+                new PlatformsFactory(platformsHolderSO),
+                new ObstaclesFactory(obstaclesHolderSO));
+            worldController = new WorldController(worldPlatforms);
+
+            playerController.Init(new PlayerMover());
         }
 
-        private void Start() =>
+        private void FixedUpdate()
+        {
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
-
-        private void FixedUpdate() =>
             playerController.Move(testDistance, testWidthElevation);
+        }
     }
 }

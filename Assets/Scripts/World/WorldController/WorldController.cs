@@ -6,6 +6,16 @@ namespace TEDinc.LinesRunner
     {
         protected readonly IWorldPlatforms worldPlatforms;
 
+        public Pose ElevatePose(float distance, float t)
+        {
+            Vector3 leftLine, rightLine;
+            ElevateLines(distance, out leftLine, out rightLine);
+
+            return new Pose(
+                Vector3.Lerp(leftLine, rightLine, t),
+                Quaternion.LookRotation(rightLine - leftLine, Vector3.up) * Quaternion.Euler(0f, 180f, 0f));
+        }
+
         public void ElevateLines(float distance, out Vector3 leftLine, out Vector3 rightLine)
         {
             float localDistance;

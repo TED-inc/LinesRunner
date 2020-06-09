@@ -8,7 +8,7 @@ namespace TEDinc.LinesRunner.Tests
         public void PlacingTest()
         {
             FakePlatformsFactory fakePlatformsFactory = new FakePlatformsFactory();
-            WorldPlatforms world = new WorldPlatforms(fakePlatformsFactory);
+            WorldPlatforms world = new WorldPlatforms(fakePlatformsFactory, new FakeObstacleFactory());
 
             fakePlatformsFactory.platformLength = 1f;
             Assert.AreEqual(1f, world.GetPlatformAt(1f - 0.0001f).length);
@@ -23,7 +23,7 @@ namespace TEDinc.LinesRunner.Tests
         [Test]
         public void CheckSpawning()
         {
-            IWorldPlatforms world = new WorldPlatforms(new FakePlatformsFactory());
+            IWorldPlatforms world = new WorldPlatforms(new FakePlatformsFactory(), new FakeObstacleFactory());
             Assert.AreEqual("fakePlatform", (world.GetPlatformAt(1f) as PlatformBase).name);
         }
     }

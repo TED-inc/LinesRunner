@@ -5,17 +5,14 @@ namespace TEDinc.LinesRunner
     public class PlatformsFactory : IPlatformsFactory
     {
         private PlatformsHolderSO platformsHolderSO;
-        private IObstaclesFactory obstaclesFactory;
 
         public IPlatform GetNextPlatform(Vector3 worldPosition, float worldRotataion)
         {
             PlatformBase instance = GameObject.Instantiate<PlatformBase>(
-                platformsHolderSO.GetNextByWeigth(),
+                platformsHolderSO.GetNextByWeigth().platform,
                 worldPosition,
                 Quaternion.Euler(0f, worldRotataion, 0f),
                 GetPlatformParent());
-
-            obstaclesFactory.SetObstacles(instance);
 
             return instance;
 
@@ -35,10 +32,7 @@ namespace TEDinc.LinesRunner
             }
         }
 
-        public PlatformsFactory(PlatformsHolderSO platformsHolderSO, IObstaclesFactory obstaclesFactory)
-        {
+        public PlatformsFactory(PlatformsHolderSO platformsHolderSO) =>
             this.platformsHolderSO = platformsHolderSO;
-            this.obstaclesFactory = obstaclesFactory;
-        }
     }
 }

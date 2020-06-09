@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-
-namespace TEDinc.LinesRunner
+﻿namespace TEDinc.LinesRunner
 {
     public interface IWeightHolder
     {
-        Object GetNextByWeigth();
+        object GetNextByWeigth();
     }
 }

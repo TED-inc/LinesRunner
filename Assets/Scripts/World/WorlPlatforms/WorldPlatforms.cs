@@ -14,6 +14,7 @@ namespace TEDinc.LinesRunner
         public List<PlatformHolder> platformHolders { get; protected set; } = new List<PlatformHolder>();
 
         protected readonly IPlatformsFactory platformsFactory;
+        protected readonly IObstaclesFactory obstaclesFactory;
 
 
 
@@ -65,6 +66,9 @@ namespace TEDinc.LinesRunner
             totalOffset += Quaternion.Euler(0f, totalOffsetRotation, 0f) * platform.offset; //rotate offset before adding
             totalOffsetRotation += platform.offsetRotation;
             totalOffsetRotation %= 360f; //clamp rotation
+
+            if (platform is PlatformBase)
+                obstaclesFactory.SetObstacles(platform as PlatformBase);
         }
 
         public void DestroyPlatformsBefore(float distance)
@@ -82,7 +86,10 @@ namespace TEDinc.LinesRunner
         }
 
 
-        public WorldPlatforms(IPlatformsFactory platformsFactory) =>
+        public WorldPlatforms(IPlatformsFactory platformsFactory, IObstaclesFactory obstaclesFactory)
+        {
             this.platformsFactory = platformsFactory;
+            this.obstaclesFactory = obstaclesFactory;
+        }
     }
 }
