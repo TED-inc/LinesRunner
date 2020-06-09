@@ -77,11 +77,11 @@ namespace TEDinc.LinesRunner.Tests
         public void LineElevationReal()
         {
             Vector3 leftLineA, rightLineA, leftLineB, rightLineB;
-            IWorldController worldControler = new WorldController(new WorldPlatforms(new PlatformsFactory(
-                AssetDatabase.LoadAssetAtPath<PlatformsHolderSO>(
-                    AssetDatabase.GUIDToAssetPath(
-                        AssetDatabase.FindAssets("t:" + nameof(PlatformsHolderSO))[0]))
-                )));
+            IWorldController worldControler = new WorldController(new WorldPlatforms(
+                new PlatformsFactory(
+                    GetSO(typeof(PlatformsHolderSO)) as PlatformsHolderSO,
+                    new ObstaclesFactory(
+                        GetSO(typeof(ObstaclesHolderSO)) as ObstaclesHolderSO))));
 
             worldControler.ElevateLines(49.9999f, out leftLineA, out rightLineA);
             worldControler.ElevateLines(50.0001f, out leftLineB, out rightLineB);
@@ -94,6 +94,21 @@ namespace TEDinc.LinesRunner.Tests
             worldControler.ElevateLines(149.9999f, out leftLineA, out rightLineA);
             worldControler.ElevateLines(150.0001f, out leftLineB, out rightLineB);
             Assert.That(leftLineA, Is.EqualTo(leftLineB).Using(Vector3EqualityComparer.Instance));
+
+
+            Object GetSO(System.Type type)
+            {
+                string[] guids = AssetDatabase.FindAssets("t:" + type.Name);
+
+                if (guids.Length > 0)
+                    return
+                        AssetDatabase.LoadAssetAtPath<Object>(AssetDatabase.GUIDToAssetPath(guids[0]));
+                else
+                {
+                    Debug.LogWarning("No found");
+                    return null;
+                }
+            }
         }
     }
 }

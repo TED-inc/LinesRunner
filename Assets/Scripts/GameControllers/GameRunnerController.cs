@@ -13,11 +13,21 @@ namespace TEDinc.LinesRunner
         private PlayerController playerController;
         [SerializeField]
         private PlatformsHolderSO platformsHolderSO;
+        [SerializeField]
+        private ObstaclesHolderSO obstaclesHolderSO;
+
+        ///<summary>temporary variable</summary>
         public float testDistance;
+        ///<summary>temporary variable</summary>
+        [Range(0f, 1f)]
+        public float testWidthElevation;
 
         private void Awake()
         {
-            worldPlatforms = new WorldPlatforms(new PlatformsFactory(platformsHolderSO));
+            worldPlatforms = new WorldPlatforms(
+                new PlatformsFactory(
+                    platformsHolderSO,
+                    new ObstaclesFactory(obstaclesHolderSO)));
             worldController = new WorldController(worldPlatforms);
 
             playerController.Init(new PlayerMover());
@@ -31,7 +41,7 @@ namespace TEDinc.LinesRunner
         private void Start() =>
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
 
-        private void Update() =>
-            playerController.Move(testDistance);
+        private void FixedUpdate() =>
+            playerController.Move(testDistance, testWidthElevation);
     }
 }

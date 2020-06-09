@@ -25,7 +25,12 @@ namespace TEDinc.LinesRunner
 
         public void LoadWorldUpTo(float from, float to)
         {
-            if (worldPlatforms.platformHolders[worldPlatforms.platformHolders.Count - 1].generatedLength < to)
+            if (worldPlatforms.platformHolders.Count > 0)
+            {
+                if (worldPlatforms.platformHolders[worldPlatforms.platformHolders.Count - 1].generatedLength < to)
+                    worldPlatforms.GetPlatformAt(to);
+            }
+            else
                 worldPlatforms.GetPlatformAt(to);
 
             foreach (PlatformHolder platformHolder in worldPlatforms.platformHolders)
