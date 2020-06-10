@@ -26,6 +26,7 @@ namespace TEDinc.LinesRunner
             collectableDetector.onTriggerEnter.AddListener(CheckCollectable);
 
             GameRunnerController.instance.OnFixedUpdateWhileRunning.AddListener(Move);
+            Move();
         }
 
         private void Move()
@@ -42,7 +43,7 @@ namespace TEDinc.LinesRunner
             if (TryCollect(collider))
                 return;
 
-            GameRunnerController.instance.gameRun = false;
+            GameFlowController.instance.HitPlayer();
         }
 
         private void CheckCollectable(Collider collider)

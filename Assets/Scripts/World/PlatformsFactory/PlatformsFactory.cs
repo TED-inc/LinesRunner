@@ -23,11 +23,11 @@ namespace TEDinc.LinesRunner
                 //null only for tests
                 return GameRunnerController.instance == null ?
                     null :
-                    GameRunnerController.instance.transform;
+                    GameRunnerController.instance.platformsHolderObject;
 #else
                 if (GameRunnerController.instance == null)
                     Debug.LogError($"[PLF] {nameof(GetPlatformParent)}: no instnce of GRC");
-                return GameRunnerController.instance.transform;
+                return GameRunnerController.instance.platformsHolderObject;
 #endif
             }
         }

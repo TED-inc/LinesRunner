@@ -36,6 +36,5 @@ namespace TEDinc.LinesRunner
             GameRunnerController.instance.inputController.OnJump.AddListener(Jump);
             GameRunnerController.instance.OnFixedUpdateWhileRunning.AddListener(OnFixedUpdate);
         }
-
     }
 }

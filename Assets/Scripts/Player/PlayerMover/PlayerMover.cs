@@ -11,7 +11,10 @@ namespace TEDinc.LinesRunner
 
         public Pose Move()
         {
-            float distance = GameConst.startPlayerSpeed * time + 0.5f * GameConst.playerAcceleration * time * time;
+            float distance = 
+                GameConst.startPlayerSpeed * time
+                + 0.5f * GameConst.playerAcceleration * time * time
+                + GameConst.startPlayerDistance;
 
             GameRunnerController.instance.worldController.LoadWorldUpTo(distance, distance + GameConst.loadDistance);
             GameRunnerController.instance.worldController.HideWorldBefore(distance - GameConst.disableDistance);

@@ -12,6 +12,7 @@ namespace TEDinc.LinesRunner
         public IInputController inputController { get; private set; }
         public UnityEvent OnUpdateWhileRunning { get; private set; } = new UnityEvent();
         public UnityEvent OnFixedUpdateWhileRunning { get; private set; } = new UnityEvent();
+        public Transform platformsHolderObject { get => _platformsHolderObject; }
 
         [SerializeField]
         private PlayerController playerController;
@@ -19,8 +20,8 @@ namespace TEDinc.LinesRunner
         private PlatformsHolderSO platformsHolderSO;
         [SerializeField]
         private ObstaclesHolderSO obstaclesHolderSO;
-
-        public bool gameRun = true;
+        [SerializeField]
+        private Transform _platformsHolderObject;
 
         private void Awake()
         {
@@ -28,26 +29,46 @@ namespace TEDinc.LinesRunner
                 instance = this;
             else
                 Debug.LogError("[GRC] Only one instance must be in game!");
+        }
 
+        [ContextMenu("RestatrGame")]
+        public void RestatrGameController()
+        {
+            //clear game on start
+            foreach (Transform child in platformsHolderObject)
+                GameObject.Destroy(child.gameObject);
+            playerController.transform.position = Vector3.zero;
+            OnUpdateWhileRunning.RemoveAllListeners();
+            OnFixedUpdateWhileRunning.RemoveAllListeners();
+
+            //initialize all
             worldPlatforms = new WorldPlatforms(
                 new PlatformsFactory(platformsHolderSO),
                 new ObstaclesFactory(obstaclesHolderSO));
             worldController = new WorldController(worldPlatforms);
-            inputController = new TouchScreenInputController();
-
+            inputController = GetInputController();
             playerController.Init();
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
+
+            IInputController GetInputController()
+            {
+#if UNITY_STANDALONE || UNITY_EDITOR
+                return new KeyboardInputController();
+#else
+                return new TouchScreenInputController();
+#endif
+            }
         }
 
         private void FixedUpdate()
         {
-            if (gameRun)
+            if (GameFlowController.instance.isGameRunning)
                 OnFixedUpdateWhileRunning.Invoke();
         }
 
         private void Update()
         {
-            if (gameRun)
+            if (GameFlowController.instance.isGameRunning)
                 OnUpdateWhileRunning.Invoke();
         }
     }

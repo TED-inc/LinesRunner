@@ -14,9 +14,10 @@
         public const float playerGravityMultipyaer = 4f;
 
         public const float loadDistance = 120f;
-        public const float disableDistance = 25f;
+        public const float disableDistance = 30f;
         public const float destroyDistance = 100f;
 
+        public const float startPlayerDistance = 5f;
         public const float startObstacleDistance = 40f;
         public const float minObstacleDistance = 5f;
         public const float maxObstacleDistance = 25f;
