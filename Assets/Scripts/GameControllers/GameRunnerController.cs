@@ -1,13 +1,17 @@
 ﻿#pragma warning disable 0649 //fix private SerializeField "will not be assigned" error
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TEDinc.LinesRunner
 {
-    public class GameRunnerController : MonoBehaviour
+    public sealed class GameRunnerController : MonoBehaviour
     {
         public static GameRunnerController instance;
         public IWorldController worldController { get; private set; }
         public IWorldPlatforms worldPlatforms { get; private set; }
+        public IInputController inputController { get; private set; }
+        public UnityEvent OnUpdate { get; private set; } = new UnityEvent();
+        public UnityEvent OnFixedUpdate { get; private set; } = new UnityEvent();
 
         [SerializeField]
         private PlayerController playerController;
@@ -15,12 +19,6 @@ namespace TEDinc.LinesRunner
         private PlatformsHolderSO platformsHolderSO;
         [SerializeField]
         private ObstaclesHolderSO obstaclesHolderSO;
-
-        ///<summary>temporary variable</summary>
-        public float testDistance;
-        ///<summary>temporary variable</summary>
-        [Range(0f, 1f)]
-        public float testWidthElevation;
 
         private void Awake()
         {
@@ -33,14 +31,17 @@ namespace TEDinc.LinesRunner
                 new PlatformsFactory(platformsHolderSO),
                 new ObstaclesFactory(obstaclesHolderSO));
             worldController = new WorldController(worldPlatforms);
+            inputController = new PCInputController();
 
-            playerController.Init(new PlayerMover());
-        }
+            playerController.Init();
 
-        private void FixedUpdate()
-        {
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
-            playerController.Move(testDistance, testWidthElevation);
         }
+
+        private void FixedUpdate() =>
+            OnFixedUpdate.Invoke();
+
+        private void Update() =>
+            OnUpdate.Invoke();
     }
 }

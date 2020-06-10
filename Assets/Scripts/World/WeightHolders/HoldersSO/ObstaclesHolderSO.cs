@@ -24,7 +24,7 @@ namespace TEDinc.LinesRunner
         private GameObject _obstacle;
         public GameObject obstacle { get => _obstacle; private set => _obstacle = value; }
         public override object obj { get => obstacle; protected set => obstacle = value as GameObject; }
-        [SerializeField]
+        [SerializeField, Range(1, GameConst.linesCount)]
         public int _linesCount;
         public int linesCount { get => _linesCount; private set => _linesCount = value; }
     }

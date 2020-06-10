@@ -7,32 +7,59 @@ namespace TEDinc.LinesRunner
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
-        private PhysicsEventsDetector physicsEventsDetector;
+        private PhysicsEventsDetector collisionDetector;
+        [SerializeField]
+        private PhysicsEventsDetector collectableDetector;
         private CharacterController characterController;
         private IPlayerMover playerMover;
+        private IPlayerJumper playerJumper;
 
-        public void Init(IPlayerMover playerMover)
-        {
-            this.playerMover = playerMover;
-            physicsEventsDetector.onTriggerEnter.AddListener(CheckCollision);
-        }
-
-        public void Move(float distance, float widthElevation)
+        public void Init()
         {
             if (characterController == null)
                 characterController = GetComponent<CharacterController>();
 
-            Pose pose = playerMover.Move(distance, widthElevation);
+            playerMover = new PlayerMover();
+            playerJumper = new PlayerJumper(characterController);
+
+            collisionDetector.onTriggerEnter.AddListener(CheckCollision);
+            collectableDetector.onTriggerEnter.AddListener(CheckCollectable);
+        }
+
+        private void FixedUpdate()
+        {
+            Move();
+        }
+
+        private void Move()
+        {
+            Pose pose = playerMover.Move();
             transform.rotation = pose.rotation;
-            characterController.Move(pose.position - characterController.transform.position);
+            characterController.Move(new Vector3(pose.position.x, playerJumper.addHeight, pose.position.z) - characterController.transform.position);
         }
 
         private void CheckCollision(Collider collider)
         {
-            if (collider.gameObject.Equals(gameObject))
+            if (collider.gameObject.Equals(gameObject) || collider.transform.parent.Equals(transform))
+                return;
+            if (TryCollect(collider))
                 return;
 
             Debug.Log($"Collide with: {collider.name}");
+        }
+
+        private void CheckCollectable(Collider collider)
+        {
+            TryCollect(collider);
+        }
+
+        private bool TryCollect(Collider collider)
+        {
+            ICollectable collectable = collider.GetComponent<ICollectable>();
+            if (collectable != null)
+                collectable.Collect();
+
+            return collectable != null;
         }
     }
 }

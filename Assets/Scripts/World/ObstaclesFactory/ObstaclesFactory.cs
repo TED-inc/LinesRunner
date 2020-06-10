@@ -33,7 +33,8 @@ namespace TEDinc.LinesRunner
                 float max = Mathf.Lerp(1f, 0.5f, linePrecent);
                 int random = Random.Range(0, GameConst.linesCount - obstacleWidth + 1);
 
-                return Mathf.Lerp(min, max, random / (GameConst.linesCount - 1f));
+
+                return Mathf.Lerp(min, max, Mathf.InverseLerp(0f, GameConst.linesCount - obstacleWidth, random));
             }
         }
 

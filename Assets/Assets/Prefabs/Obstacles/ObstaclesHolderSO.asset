@@ -17,11 +17,27 @@ MonoBehaviour:
     _obstacle: {fileID: 7687927136636302993, guid: 393b42cb479b8a347a3deebbe2f2618c,
       type: 3}
     _linesCount: 1
-  - _weight: 1
+  - _weight: 2
     _obstacle: {fileID: 7687927136636302993, guid: 74eb0d047251bda4ea561b10ea9aea85,
       type: 3}
     _linesCount: 1
   - _weight: 1
     _obstacle: {fileID: 7687927136636302993, guid: dd9472614437f6447b6662f047ba1bea,
+      type: 3}
+    _linesCount: 1
+  - _weight: 1
+    _obstacle: {fileID: 7687927136636302993, guid: e6af2119bbcaea546ac752b4ac31f723,
+      type: 3}
+    _linesCount: 3
+  - _weight: 2
+    _obstacle: {fileID: 7687927136636302993, guid: 2a9bd40237875344c83cc085f39c0639,
+      type: 3}
+    _linesCount: 2
+  - _weight: 4
+    _obstacle: {fileID: 137057514342270638, guid: 0158b56a958c10846aad522ae0107ac4,
+      type: 3}
+    _linesCount: 1
+  - _weight: 1
+    _obstacle: {fileID: 7687927136636302993, guid: fad7250e91d678644a385d5241a4eee1,
       type: 3}
     _linesCount: 1

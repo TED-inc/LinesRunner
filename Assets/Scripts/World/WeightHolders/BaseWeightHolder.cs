@@ -39,7 +39,7 @@ namespace TEDinc.LinesRunner
     {
         public virtual object obj { get; protected set; }
         public float weight { get { return _weight; } protected set { _weight = value; } }
-        [SerializeField]
+        [SerializeField, Min(0.01f)]
         protected float _weight;
     }
 }
