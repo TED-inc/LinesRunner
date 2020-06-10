@@ -10,8 +10,8 @@ namespace TEDinc.LinesRunner
         public IWorldController worldController { get; private set; }
         public IWorldPlatforms worldPlatforms { get; private set; }
         public IInputController inputController { get; private set; }
-        public UnityEvent OnUpdate { get; private set; } = new UnityEvent();
-        public UnityEvent OnFixedUpdate { get; private set; } = new UnityEvent();
+        public UnityEvent OnUpdateWhileRunning { get; private set; } = new UnityEvent();
+        public UnityEvent OnFixedUpdateWhileRunning { get; private set; } = new UnityEvent();
 
         [SerializeField]
         private PlayerController playerController;
@@ -19,6 +19,8 @@ namespace TEDinc.LinesRunner
         private PlatformsHolderSO platformsHolderSO;
         [SerializeField]
         private ObstaclesHolderSO obstaclesHolderSO;
+
+        public bool gameRun = true;
 
         private void Awake()
         {
@@ -31,17 +33,22 @@ namespace TEDinc.LinesRunner
                 new PlatformsFactory(platformsHolderSO),
                 new ObstaclesFactory(obstaclesHolderSO));
             worldController = new WorldController(worldPlatforms);
-            inputController = new PCInputController();
+            inputController = new TouchScreenInputController();
 
             playerController.Init();
-
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
         }
 
-        private void FixedUpdate() =>
-            OnFixedUpdate.Invoke();
+        private void FixedUpdate()
+        {
+            if (gameRun)
+                OnFixedUpdateWhileRunning.Invoke();
+        }
 
-        private void Update() =>
-            OnUpdate.Invoke();
+        private void Update()
+        {
+            if (gameRun)
+                OnUpdateWhileRunning.Invoke();
+        }
     }
 }

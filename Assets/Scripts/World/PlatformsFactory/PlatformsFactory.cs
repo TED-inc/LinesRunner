@@ -26,7 +26,7 @@ namespace TEDinc.LinesRunner
                     GameRunnerController.instance.transform;
 #else
                 if (GameRunnerController.instance == null)
-                    Debug.LogError($"[PLF] {nameof(GetRandomPlatformIndex)}: no instnce of GRC");
+                    Debug.LogError($"[PLF] {nameof(GetPlatformParent)}: no instnce of GRC");
                 return GameRunnerController.instance.transform;
 #endif
             }

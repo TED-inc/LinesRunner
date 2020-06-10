@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace TEDinc.LinesRunner
 {
-    public sealed class PCInputController : InputControllerBase
+    public sealed class KeyboardInputController : InputControllerBase
     {
         protected override void OnUpdate()
         {
