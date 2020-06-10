@@ -13,6 +13,6 @@ namespace TEDinc.LinesRunner
         protected abstract void OnUpdate();
 
         public InputControllerBase() =>
-            GameRunnerController.instance.OnUpdateWhileRunning.AddListener(OnUpdate);
+            GameRunningDelegateController.instance.onUpdateWhileRunning.Add(OnUpdate);
     }
 }

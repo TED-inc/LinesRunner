@@ -64,8 +64,8 @@ namespace TEDinc.LinesRunner
             playerHited = false;
             isGameRunning = false;
             GameRunnerController.instance.RestatrGameController();
-            GameRunnerController.instance.OnUpdateWhileRunning.Invoke();
-            GameRunnerController.instance.OnFixedUpdateWhileRunning.Invoke();
+            GameRunningDelegateController.instance.FixedUpdateWhileRunningInvoke();
+            GameRunningDelegateController.instance.UpdateWhileRunningInvoke();
         }
 
         public void RestartGame()

@@ -27,30 +27,59 @@ namespace TEDinc.LinesRunner
         public IPlatform GetPlatformAt(float distance, out float localDistance)
         {
             localDistance = distance;
-            if (distance < 0f)
-            {
-                Debug.LogError("[WLP] GetPlatform : negetive distance");
+
+            if (CheckDistance())
                 return null;
-            }
 
-            //add new platforms if it necessary
-            while (distance >= generatedPlatformsLength)
-                AddNewPlatform();
+            return FindPlatform(ref localDistance);
 
-            //check for low distnce
-            if (platformHolders[0].generatedLength >= distance)
-                return platformHolders[0].platform;
+            ////check for low distnce
+            //if (platformHolders[0].generatedLength >= distance)
+            //    return platformHolders[0].platform;
+            //
+            ////find platform for distnce
+            //for (int i = 0; i < platformHolders.Count - 1; i++)
+            //    if (platformHolders[i].generatedLength < distance && platformHolders[i + 1].generatedLength >= distance)
+            //    {
+            //        localDistance = distance - platformHolders[i].generatedLength;
+            //        return platformHolders[i + 1].platform;
+            //    }
+            //
+            //Debug.LogError("[WLP] GetPlatform : logic error");
+            //return platformHolders[platformHolders.Count - 1].platform;
 
-            //find platform for distnce
-            for (int i = 0; i < platformHolders.Count - 1; i++)
-                if (platformHolders[i].generatedLength < distance && platformHolders[i + 1].generatedLength >= distance)
+
+            bool CheckDistance()
+            {
+                if (distance < 0f)
                 {
-                    localDistance = distance - platformHolders[i].generatedLength;
-                    return platformHolders[i + 1].platform;
+                    Debug.LogError("[WLP] GetPlatform : negetive distance");
+                    return true;
                 }
 
-            Debug.LogError("[WLP] GetPlatform : logic error");
-            return platformHolders[platformHolders.Count - 1].platform;
+                while (distance >= generatedPlatformsLength)
+                    AddNewPlatform();
+
+                return false;
+            }
+
+            IPlatform FindPlatform(ref float localDist)
+            {
+                //check for low distnce
+                if (platformHolders[0].generatedLength >= distance)
+                    return platformHolders[0].platform;
+
+                //find platform for distnce
+                for (int i = 0; i < platformHolders.Count - 1; i++)
+                    if (platformHolders[i].generatedLength < distance && platformHolders[i + 1].generatedLength >= distance)
+                    {
+                        localDist = distance - platformHolders[i].generatedLength;
+                        return platformHolders[i + 1].platform;
+                    }
+
+                Debug.LogError("[WLP] GetPlatform : logic error");
+                return platformHolders[platformHolders.Count - 1].platform;
+            }
         }
 
         protected void AddNewPlatform()

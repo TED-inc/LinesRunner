@@ -1,4 +1,6 @@
 ﻿#pragma warning disable 0649 //fix private SerializeField "will not be assigned" error
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,8 +12,6 @@ namespace TEDinc.LinesRunner
         public IWorldController worldController { get; private set; }
         public IWorldPlatforms worldPlatforms { get; private set; }
         public IInputController inputController { get; private set; }
-        public UnityEvent OnUpdateWhileRunning { get; private set; } = new UnityEvent();
-        public UnityEvent OnFixedUpdateWhileRunning { get; private set; } = new UnityEvent();
         public Transform platformsHolderObject { get => _platformsHolderObject; }
 
         [SerializeField]
@@ -37,9 +37,7 @@ namespace TEDinc.LinesRunner
             //clear game on start
             foreach (Transform child in platformsHolderObject)
                 GameObject.Destroy(child.gameObject);
-            playerController.transform.position = Vector3.zero;
-            OnUpdateWhileRunning.RemoveAllListeners();
-            OnFixedUpdateWhileRunning.RemoveAllListeners();
+            GameRunningDelegateController.instance.ResetDelegateLists();
 
             //initialize all
             worldPlatforms = new WorldPlatforms(
@@ -50,6 +48,8 @@ namespace TEDinc.LinesRunner
             playerController.Init();
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
 
+
+
             IInputController GetInputController()
             {
 #if UNITY_STANDALONE || UNITY_EDITOR
@@ -58,18 +58,6 @@ namespace TEDinc.LinesRunner
                 return new TouchScreenInputController();
 #endif
             }
-        }
-
-        private void FixedUpdate()
-        {
-            if (GameFlowController.instance.isGameRunning)
-                OnFixedUpdateWhileRunning.Invoke();
-        }
-
-        private void Update()
-        {
-            if (GameFlowController.instance.isGameRunning)
-                OnUpdateWhileRunning.Invoke();
         }
     }
 }

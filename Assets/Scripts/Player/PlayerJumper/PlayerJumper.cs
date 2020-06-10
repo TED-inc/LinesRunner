@@ -34,7 +34,7 @@ namespace TEDinc.LinesRunner
         {
             this.characterController = characterController;
             GameRunnerController.instance.inputController.OnJump.AddListener(Jump);
-            GameRunnerController.instance.OnFixedUpdateWhileRunning.AddListener(OnFixedUpdate);
+            GameRunningDelegateController.instance.onFixedUpdateWhileRunning.Add(OnFixedUpdate);
         }
     }
 }

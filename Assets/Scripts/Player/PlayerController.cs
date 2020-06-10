@@ -25,8 +25,7 @@ namespace TEDinc.LinesRunner
             collisionDetector.onTriggerEnter.AddListener(CheckCollision);
             collectableDetector.onTriggerEnter.AddListener(CheckCollectable);
 
-            GameRunnerController.instance.OnFixedUpdateWhileRunning.AddListener(Move);
-            Move();
+            GameRunningDelegateController.instance.onFixedUpdateWhileRunning.Add(Move);  
         }
 
         private void Move()

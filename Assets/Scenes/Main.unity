@@ -1817,6 +1817,7 @@ GameObject:
   - component: {fileID: 1189647642}
   - component: {fileID: 1189647641}
   - component: {fileID: 1189647643}
+  - component: {fileID: 1189647644}
   m_Layer: 0
   m_Name: '[GameControlers]'
   m_TagString: Untagged
@@ -1870,6 +1871,18 @@ MonoBehaviour:
   runOverlay: {fileID: 653197035}
   pauseOverlay: {fileID: 961622261}
   playerHitOverlay: {fileID: 1573512082}
+--- !u!114 &1189647644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189647640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505fbeaab563d184b885a492506a95c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1214873209
 GameObject:
   m_ObjectHideFlags: 0
