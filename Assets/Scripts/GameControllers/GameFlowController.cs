@@ -82,6 +82,9 @@ namespace TEDinc.LinesRunner
             GameDataController.instance.RefreshStartData();
         }
 
+        public void ExitGame() =>
+            Application.Quit();
+
 
         private void ShowOverlay(Overlay overlay)
         {
