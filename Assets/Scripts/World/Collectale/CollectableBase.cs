@@ -7,12 +7,7 @@ namespace TEDinc.LinesRunner
         public virtual string playerPrefsName { get; }
         public bool collected { get; protected set; }
 
-        public virtual void Collect()
-        {
-            if (!collected)
-                Debug.Log($"[CLC] Collected: {playerPrefsName}");
-            collected = true;
+        public virtual void Collect() =>
             Destroy(gameObject);
-        }
     }
 }

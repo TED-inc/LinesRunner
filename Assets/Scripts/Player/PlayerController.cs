@@ -33,6 +33,7 @@ namespace TEDinc.LinesRunner
             Pose pose = playerMover.Move();
             transform.rotation = pose.rotation;
             characterController.Move(new Vector3(pose.position.x, playerJumper.addHeight, pose.position.z) - characterController.transform.position);
+            GameDataController.instance.InvokeByPlayerPrefs(GameConst.PlayerPrefs.distance);
         }
 
         private void CheckCollision(Collider collider)

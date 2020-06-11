@@ -4,7 +4,6 @@
     {
         public void SetObstacles(PlatformBase platformBase)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

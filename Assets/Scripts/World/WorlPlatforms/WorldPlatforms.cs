@@ -33,20 +33,6 @@ namespace TEDinc.LinesRunner
 
             return FindPlatform(ref localDistance);
 
-            ////check for low distnce
-            //if (platformHolders[0].generatedLength >= distance)
-            //    return platformHolders[0].platform;
-            //
-            ////find platform for distnce
-            //for (int i = 0; i < platformHolders.Count - 1; i++)
-            //    if (platformHolders[i].generatedLength < distance && platformHolders[i + 1].generatedLength >= distance)
-            //    {
-            //        localDistance = distance - platformHolders[i].generatedLength;
-            //        return platformHolders[i + 1].platform;
-            //    }
-            //
-            //Debug.LogError("[WLP] GetPlatform : logic error");
-            //return platformHolders[platformHolders.Count - 1].platform;
 
 
             bool CheckDistance()

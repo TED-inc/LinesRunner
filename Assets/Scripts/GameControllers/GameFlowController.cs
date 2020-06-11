@@ -38,6 +38,7 @@ namespace TEDinc.LinesRunner
             ShowOverlay(Overlay.playerHit);
             playerHited = true;
             isGameRunning = false;
+            GameDataController.instance.RefreshEndData();
         }
 
         public void PauseGame()
@@ -64,6 +65,7 @@ namespace TEDinc.LinesRunner
             playerHited = false;
             isGameRunning = false;
             GameRunnerController.instance.RestatrGameController();
+            GameDataController.instance.RefreshStartData();
             GameRunningDelegateController.instance.FixedUpdateWhileRunningInvoke();
             GameRunningDelegateController.instance.UpdateWhileRunningInvoke();
         }
@@ -74,6 +76,7 @@ namespace TEDinc.LinesRunner
             playerHited = false;
             isGameRunning = true;
             GameRunnerController.instance.RestatrGameController();
+            GameDataController.instance.RefreshStartData();
         }
 
 

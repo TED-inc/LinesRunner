@@ -22,11 +22,16 @@
         public const float minObstacleDistance = 5f;
         public const float maxObstacleDistance = 25f;
 
-        public const string playerPrefsCoin = "coin";
-
         public const string platformMeshObjectName = "mesh";
         public const string platformMeshSavePath = "Assets/Assets/Graphics/Models";
 
         public const float inputTouchMinLenthToMove = 50f;
+
+        public enum PlayerPrefs
+        {
+            coin,
+            distance,
+            maxDistance
+        }
     }
 }

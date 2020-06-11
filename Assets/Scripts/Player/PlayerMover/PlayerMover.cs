@@ -16,6 +16,8 @@ namespace TEDinc.LinesRunner
                 + 0.5f * GameConst.playerAcceleration * time * time
                 + GameConst.startPlayerDistance;
 
+            PlayerPrefs.SetInt(nameof(GameConst.PlayerPrefs.distance), (int)(distance - GameConst.startPlayerDistance));
+
             GameRunnerController.instance.worldController.LoadWorldUpTo(distance, distance + GameConst.loadDistance);
             GameRunnerController.instance.worldController.HideWorldBefore(distance - GameConst.disableDistance);
             GameRunnerController.instance.worldPlatforms.DestroyPlatformsBefore(distance - GameConst.destroyDistance);
