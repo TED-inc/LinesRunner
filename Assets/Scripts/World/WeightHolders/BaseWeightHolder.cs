@@ -4,6 +4,10 @@ using Random = UnityEngine.Random;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// base implementation of IWeightHolder
+    /// hold data and return random by its weight(as bigger weight -> bigger chanse to get it)
+    /// </summary>
     public abstract class BaseWeightHolder : ScriptableObject, IWeightHolder
     {
         public virtual WeightHolder[] collection { get; protected set; }

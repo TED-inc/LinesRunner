@@ -4,6 +4,9 @@ using TMPro;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// dynamicly show playerprefs int from game constants
+    /// </summary>
     public sealed class DataTextByPlayerPrefsInt : MonoBehaviour
     {
         [SerializeField]

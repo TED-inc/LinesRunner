@@ -4,6 +4,9 @@ using UnityEngine.Events;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// calls events on collision of gameobject for another classes
+    /// </summary>
     public class PhysicsEventsDetector : MonoBehaviour
     {
         public ColliderEvent onTriggerEnter;

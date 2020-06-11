@@ -2,6 +2,10 @@
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// implemenation of IObstaclesFactory:
+    /// factory of spawnable obstacles on platform
+    /// </summary>
     public class ObstaclesFactory : IObstaclesFactory
     {
         private ObstaclesHolderSO obstaclesHolderSO;

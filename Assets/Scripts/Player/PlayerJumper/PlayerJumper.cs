@@ -2,6 +2,10 @@
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// implementation of IPlayerJumper:
+    /// controls player veritcal movement
+    /// </summary>
     public sealed class PlayerJumper : IPlayerJumper
     {
         public float addHeight { get; private set; } = 0f;

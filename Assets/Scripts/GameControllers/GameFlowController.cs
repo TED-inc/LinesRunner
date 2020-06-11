@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// controls flow of game, and its menus
+    /// </summary>
     public sealed class GameFlowController : MonoBehaviour
     {
         public static GameFlowController instance;

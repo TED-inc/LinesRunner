@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// base implementation of ICollectable:
+/// collecatable items in game
+/// </summary>
 namespace TEDinc.LinesRunner
 {
     public abstract class CollectableBase : MonoBehaviour, ICollectable

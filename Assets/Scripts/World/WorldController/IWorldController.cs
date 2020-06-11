@@ -2,6 +2,9 @@
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// works with platform data
+    /// </summary>
     public interface IWorldController
     {
         Pose ElevatePose(float distance, float t);

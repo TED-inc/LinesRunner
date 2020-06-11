@@ -2,6 +2,9 @@
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// call moving events by input
+    /// </summary>
     public interface IInputController
     {
         UnityEvent OnMoveLeft { get; }

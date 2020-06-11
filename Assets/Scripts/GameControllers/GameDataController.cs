@@ -5,6 +5,9 @@ using TMPro;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// controls and displays data for player
+    /// </summary>
     public sealed class GameDataController : MonoBehaviour
     {
         public static GameDataController instance;
@@ -30,8 +33,10 @@ namespace TEDinc.LinesRunner
         }
 
 
-        
 
+        /// <summary>
+        /// return list of delegates to subscribe/unsubscribe of it
+        /// </summary>
         public List<Del> GetDelegatesByPlayerPrefs(GameConst.PlayerPrefs playerPrefs)
         {
             switch (playerPrefs)
@@ -47,12 +52,18 @@ namespace TEDinc.LinesRunner
             }
         }
 
+        /// <summary>
+        /// invoke all delegates subscribed to parametr
+        /// </summary>
         public void InvokeByPlayerPrefs(GameConst.PlayerPrefs playerPrefs)
         {
             foreach (Del deleg in GetDelegatesByPlayerPrefs(playerPrefs))
                 deleg.Invoke();
         }
 
+        /// <summary>
+        /// refresh visible on start
+        /// </summary>
         public void RefreshStartData()
         {
             if (PlayerPrefs.GetInt(nameof(GameConst.PlayerPrefs.maxDistance)) < PlayerPrefs.GetInt(nameof(GameConst.PlayerPrefs.distance)))
@@ -62,6 +73,9 @@ namespace TEDinc.LinesRunner
             oldMaxDistanceOnStart = PlayerPrefs.GetInt(nameof(GameConst.PlayerPrefs.maxDistance));
         }
 
+        /// <summary>
+        /// refresh visible on end
+        /// </summary>
         public void RefreshEndData()
         {
             coinsByRun.text = (PlayerPrefs.GetInt(nameof(GameConst.PlayerPrefs.coin)) - coinsCountOnStart).ToString();

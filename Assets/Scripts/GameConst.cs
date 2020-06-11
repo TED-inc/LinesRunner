@@ -1,5 +1,8 @@
 ﻿namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    ///game parametres
+    /// </summary>
     public static class GameConst
     {
         public const int linesCount = 3;
@@ -27,6 +30,9 @@
 
         public const float inputTouchMinLenthToMove = 50f;
 
+        /// <summary>
+        /// data saving enum
+        /// </summary>
         public enum PlayerPrefs
         {
             coin,

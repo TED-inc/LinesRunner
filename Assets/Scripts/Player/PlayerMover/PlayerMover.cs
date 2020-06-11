@@ -2,6 +2,10 @@
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// implementation of IPlayerMover:
+    /// controls player horizontal movement
+    /// </summary>
     public sealed class PlayerMover : IPlayerMover
     {
         private float time = 0f;

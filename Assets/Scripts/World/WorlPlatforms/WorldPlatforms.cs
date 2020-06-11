@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// base implementation of IWorldPlatforms:
+    /// keeps data of platforms and save getting of them
+    /// </summary>
     public class WorldPlatforms : IWorldPlatforms
     {
         public float generatedPlatformsLength =>

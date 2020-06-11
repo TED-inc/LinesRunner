@@ -2,6 +2,10 @@
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// implementation of IPlatformsFactory:
+    /// factory of platforms
+    /// </summary>
     public class PlatformsFactory : IPlatformsFactory
     {
         private PlatformsHolderSO platformsHolderSO;

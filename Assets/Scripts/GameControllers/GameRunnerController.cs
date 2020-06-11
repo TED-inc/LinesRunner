@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// main game controller. Holds all main data and other controllers
+    /// </summary>
     public sealed class GameRunnerController : MonoBehaviour
     {
         public static GameRunnerController instance;
@@ -49,7 +52,7 @@ namespace TEDinc.LinesRunner
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
 
 
-
+            ///return input controller by platform
             IInputController GetInputController()
             {
 #if UNITY_STANDALONE || UNITY_EDITOR

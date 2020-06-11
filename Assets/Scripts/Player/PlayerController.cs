@@ -3,8 +3,11 @@ using UnityEngine;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// player instance. Controls all its moves, collisions and triggers
+    /// </summary>
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : MonoBehaviour
+    public sealed class PlayerController : MonoBehaviour
     {
         [SerializeField]
         private PhysicsEventsDetector collisionDetector;
@@ -14,6 +17,10 @@ namespace TEDinc.LinesRunner
         private IPlayerMover playerMover;
         private IPlayerJumper playerJumper;
 
+
+        /// <summary>
+        /// necessary call on create/recreate
+        /// </summary>
         public void Init()
         {
             if (characterController == null)

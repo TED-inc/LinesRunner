@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// android, ios, etc input controller
+    /// </summary>
     public sealed class TouchScreenInputController : InputControllerBase
     {
         private Dictionary<int, Vector2> touchStartPositions = new Dictionary<int, Vector2>();

@@ -3,6 +3,9 @@ using UnityEngine.Events;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// standalone input controller
+    /// </summary>
     public sealed class KeyboardInputController : InputControllerBase
     {
         protected override void OnUpdate()

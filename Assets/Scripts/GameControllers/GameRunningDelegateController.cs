@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// calls delegates for subscribed non monobehaviours classes
+    /// </summary>
     public sealed class GameRunningDelegateController : MonoBehaviour
     {
         public static GameRunningDelegateController instance;

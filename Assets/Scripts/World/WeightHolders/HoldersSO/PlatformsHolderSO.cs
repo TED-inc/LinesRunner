@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TEDinc.LinesRunner
 {
+    /// <summary>
+    /// holds platforms to spawn in world
+    /// </summary>
     [CreateAssetMenu(menuName = nameof(LinesRunner) + "/" + nameof(PlatformsHolderSO))]
     public sealed class PlatformsHolderSO : BaseWeightHolder
     {
@@ -17,6 +20,9 @@ namespace TEDinc.LinesRunner
         }
     }
 
+    /// <summary>
+    /// holder for array
+    /// </summary>
     [Serializable]
     public sealed class PlatformWeightHolder : WeightHolder
     {
