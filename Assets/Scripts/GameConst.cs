@@ -11,6 +11,7 @@
         public const float startPlayerSpeed = 10f;
         public const float playerAcceleration = 0.1f;
 
+        public const int playerStartLine = 1;
         public const float playerChangeLineDyration = 0.15f;
 
         public const float playerJumpSpeed = 10f;

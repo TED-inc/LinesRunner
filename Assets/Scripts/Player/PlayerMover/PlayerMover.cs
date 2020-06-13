@@ -9,9 +9,9 @@ namespace TEDinc.LinesRunner
     public sealed class PlayerMover : IPlayerMover
     {
         private float time = 0f;
-        private float widthElevation;
         private float lineChangeTime;
-        private int targetLine;
+        private float widthElevation = GameConst.playerStartLine / (GameConst.linesCount - 1f);
+        private int targetLine = GameConst.playerStartLine;
 
         public Pose Move()
         {

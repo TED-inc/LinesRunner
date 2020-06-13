@@ -43,11 +43,11 @@ namespace TEDinc.LinesRunner
             GameRunningDelegateController.instance.ResetDelegateLists();
 
             //initialize all
+            inputController = GetInputController();
             worldPlatforms = new WorldPlatforms(
                 new PlatformsFactory(platformsHolderSO),
                 new ObstaclesFactory(obstaclesHolderSO));
             worldController = new WorldController(worldPlatforms);
-            inputController = GetInputController();
             playerController.Init();
             worldController.LoadWorldUpTo(0f, GameConst.loadDistance);
 
