@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 0649 //fix private SerializeField "will not be assigned" error
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TEDinc.LinesRunner
 {
@@ -9,7 +10,18 @@ namespace TEDinc.LinesRunner
     public sealed class GameFlowController : MonoBehaviour
     {
         public static GameFlowController instance;
-        public bool isGameRunning { get; private set; }
+        public bool isGameRunning
+        { 
+            get => _isGameRunning; 
+            private set
+            {
+                if (_isGameRunning != value)
+                    onGameRunningChange.Invoke(value);
+                _isGameRunning = value;
+            }
+        }
+        private bool _isGameRunning;
+        public UnityEventBool onGameRunningChange = new UnityEventBool();
         private bool playerHited;
 
         [SerializeField]
@@ -123,4 +135,6 @@ namespace TEDinc.LinesRunner
             playerHit
         }
     }
+
+    public class UnityEventBool : UnityEvent<bool> { }
 }

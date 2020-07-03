@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c1895c4573500a4383c08623d18f2eb, type: 3}
+  m_Name: noObstaclesHolderSO
+  m_EditorClassIdentifier: 
+  _obstacles:
+  - _weight: 1
+    _obstacle: {fileID: 137057514342270638, guid: 0158b56a958c10846aad522ae0107ac4,
+      type: 3}
+    _linesCount: 1
